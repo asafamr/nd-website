@@ -19,6 +19,7 @@
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
     <link href="css/ndjs.css" rel="stylesheet">
+    <link href="css/api.css" rel="stylesheet">
     <!-- endbuild -->
     <!-- build:js scripts/vendor/modernizr.js -->
     <!--script src="/bower_components/modernizr/modernizr.js"></script-->
@@ -45,8 +46,520 @@
     <div class="row">
       <h1>NDJS has several modules:</h1>
       <ul>
-        <li><div class="package-name">nd-node</div> <div></li>
+        <li><div class="package-name">nd-node</div>
+          <div class="package-desc">node backend and file operations</div></li>
+
+        <li><div class="package-name">nd-angular</div>
+          <div class="package-desc">angular frontend and view logic</div></li>
+
+        <li><div class="package-name">nd-grunt</div>
+          <div class="package-desc">installer compiling and debugging tasks</div></li>
+
+        <li><div class="package-name">nd-packer</div>
+          <div class="package-desc">native compiler</div></li>
+
+        <li><div class="package-name">nd-extract</div>
+          <div class="package-desc">native self extractor component</div></li>
+
+        <li><div class="package-name">peml</div>
+          <div class="package-desc">Windows PE metadata editing lib</div></li>
+
       </ul>
+    </div>
+    <div class="row">
+      <h2>JavaScript modules API</h2>
+
+      <section id="#nd-angular">
+      <h3>nd-angular</h3>
+      <div class="dox-modules">
+          <div class="dox-module">
+              <div class="dox-name">ndAngular</div>
+              <div class="dox-description">ndAngular module includes directives and services - the NDJS framework
+                  frontend note:the module wait for NDJS backend to be ready and then bootstraps
+                  angular and registers all ndjs pages as urls</div>
+          </div>
+      </div>
+      <div class="dox-services">
+          <div class="dox-service">
+              <div class="dox-name">ndJobManager</div>
+              <div class="dox-description">starts, queries ndjs jobs progress</div>
+              <div class="dox-methods">
+                  <div class="dox-method">
+                      <div class="dox-name">startJob</div>
+                      <div class="dox-params">
+                          <div class="dox-param">
+                              <div class="dox-name">jobName</div>
+                              <div class="dox-type">String</div>
+                              <div class="dox-description">name of the job to start</div>
+                          </div>
+                          <div class="dox-param">
+                              <div class="dox-name">force</div>
+                              <div class="dox-type">Boolean</div>
+                              <div class="dox-description">start even it has already started before</div>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="dox-method">
+                      <div class="dox-name">getJobProgress</div>
+                      <div class="dox-description">gets a job progress</div>
+                      <div class="dox-params">
+                          <div class="dox-param">
+                              <div class="dox-name">jobName</div>
+                              <div class="dox-type">String</div>
+                              <div class="dox-description">name of the job to query</div>
+                          </div>
+                      </div>
+                      <div class="dox-return">{Number} job progress between 0 and 1 (1=completed)</div>
+                  </div>
+              </div>
+          </div>
+          <div class="dox-service">
+              <div class="dox-name">ndPager</div>
+              <div class="dox-description">manages ndjs pages changes</div>
+              <div class="dox-methods">
+                  <div class="dox-method">
+                      <div class="dox-name">gotoPageNumber</div>
+                      <div class="dox-description">goto to page number</div>
+                      <div class="dox-params">
+                          <div class="dox-param">
+                              <div class="dox-name">pageNum</div>
+                              <div class="dox-type">Number</div>
+                              <div class="dox-description">target page number</div>
+                          </div>
+                      </div>
+                      <div class="dox-example">gotoPageNumber(5)</div>
+                  </div>
+                  <div class="dox-method">
+                      <div class="dox-name">backEnabled</div>
+                      <div class="dox-description">queries or sets if back option enabled</div>
+                      <div class="dox-params">
+                          <div class="dox-param">
+                              <div class="dox-name">setEnabled</div>
+                              <div class="dox-type">Boolean</div>
+                              <div class="dox-description">(optional) enables/disables go back option</div>
+                          </div>
+                      </div>
+                      <div class="dox-return">{Number} returns if back option is enabled</div>
+                      <div class="dox-example">backEnabled() backEnabled(false)</div>
+                  </div>
+                  <div class="dox-method">
+                      <div class="dox-name">nextEnabled</div>
+                      <div class="dox-description">queries or sets if next option enabled</div>
+                      <div class="dox-params">
+                          <div class="dox-param">
+                              <div class="dox-name">setEnabled</div>
+                              <div class="dox-type">Boolean</div>
+                              <div class="dox-description">(optional) enables/disables go next option</div>
+                          </div>
+                      </div>
+                      <div class="dox-return">{Number} returns if next option is enabled</div>
+                      <div class="dox-example">nextEnabled() nextEnabled(false)</div>
+                  </div>
+                  <div class="dox-method">
+                      <div class="dox-name">goNextPage</div>
+                      <div class="dox-description">go to the next page</div>
+                  </div>
+                  <div class="dox-method">
+                      <div class="dox-name">goBackPage</div>
+                      <div class="dox-description">go back to the last page</div>
+                  </div>
+                  <div class="dox-method">
+                      <div class="dox-name">getPageNumber</div>
+                      <div class="dox-description">get page number</div>
+                      <div class="dox-return">{Number} page number</div>
+                  </div>
+                  <div class="dox-method">
+                      <div class="dox-name">preventBackFromHere</div>
+                      <div class="dox-description">set back disabled from this page (for example, if you finished a job and
+                          want to prevent going back to its configuration page)</div>
+                  </div>
+              </div>
+          </div>
+          <div class="dox-service">
+              <div class="dox-name">ndActions</div>
+              <div class="dox-description">interface for ui actions registered from the NDJS backend. Actions are
+                  injected to this service as native functions that return a promise</div>
+          </div>
+          <div class="dox-service">
+              <div class="dox-name">ndEvents</div>
+              <div class="dox-description">Handles notification pushed from the backend to the UI. Uses angular brodacst
+                  to send events. check the job manager for events handling</div>
+          </div>
+          <div class="dox-service">
+              <div class="dox-name">ndWindow</div>
+              <div class="dox-description">handles winodow minimization, maximization and close</div>
+              <div class="dox-methods">
+                  <div class="dox-method">
+                      <div class="dox-name">close</div>
+                      <div class="dox-description">closes the window. on browser debug mode does nothing</div>
+                  </div>
+                  <div class="dox-method">
+                      <div class="dox-name">minimize</div>
+                      <div class="dox-description">minimize the window. on browser debug mode does nothing</div>
+                  </div>
+                  <div class="dox-method">
+                      <div class="dox-name">toggleFullscreen</div>
+                      <div class="dox-description">toggle window maximization. on browser debug mode does nothing</div>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <div class="dox-directives">
+          <div class="dox-directive">
+              <div class="dox-name">ndDirSelect</div>
+              <div class="dox-description">directory selection &lt;input&gt;- consists of a text input and a button
+                  that opens a pick dialog</div>
+              <div class="dox-params">
+                  <div class="dox-param">
+                      <div class="dox-name">dir</div>
+                      <div class="dox-type">Object</div>
+                      <div class="dox-description">two way bound to dir selected</div>
+                  </div>
+                  <div class="dox-param">
+                      <div class="dox-name">inputClass</div>
+                      <div class="dox-type">String</div>
+                      <div class="dox-description">css class for the &lt;input&gt; text field</div>
+                  </div>
+                  <div class="dox-param">
+                      <div class="dox-name">buttonClass</div>
+                      <div class="dox-type">String</div>
+                      <div class="dox-description">css class for the select button</div>
+                  </div>
+                  <div class="dox-param">
+                      <div class="dox-name">buttonText</div>
+                      <div class="dox-type">String</div>
+                      <div class="dox-description">button text</div>
+                  </div>
+              </div>
+              <div class="dox-example">&lt;nd-dir-select dir=&quot;vm.selectedDir&quot; input-class=&quot;dir-sel-text-1&quot;
+                  button-class=&quot;dir-sel-text-1&quot; button-text=&quot;Choose...&quot;&gt;</div>
+          </div>
+          <div class="dox-directive">
+              <div class="dox-name">ndPager</div>
+              <div class="dox-description">pager with next and back button - sends commands to the pager service</div>
+              <div
+              class="dox-params">
+                  <div class="dox-param">
+                      <div class="dox-name">nextText</div>
+                      <div class="dox-type">String</div>
+                      <div class="dox-description">html for the next button content</div>
+                  </div>
+                  <div class="dox-param">
+                      <div class="dox-name">backText</div>
+                      <div class="dox-type">String</div>
+                      <div class="dox-description">html for the back button content</div>
+                  </div>
+          </div>
+          <div class="dox-example">&lt;nd-pager next-text=&quot;continue&quot; back-text=&quot;back&quot;&gt;</div>
+      </div>
+      <div class="dox-directive">
+          <div class="dox-name">ndWindowFrame</div>
+          <div class="dox-description">has 3 buttons that sends events to the window service - minimize, maximize
+              toggleand close</div>
+          <div class="dox-params">
+              <div class="dox-param">
+                  <div class="dox-name">showMin</div>
+                  <div class="dox-type">Boolean</div>
+                  <div class="dox-description">ng-show for minimize button (defualt true)</div>
+              </div>
+              <div class="dox-param">
+                  <div class="dox-name">showToggleFullscreen</div>
+                  <div class="dox-type">Boolean</div>
+                  <div class="dox-description">ng-show for toggle maximize button (defualt true)</div>
+              </div>
+              <div class="dox-param">
+                  <div class="dox-name">showClose</div>
+                  <div class="dox-type">Boolean</div>
+                  <div class="dox-description">ng-show for toggle maximize button (defualt true)</div>
+              </div>
+          </div>
+          <div class="dox-example">&lt;nd-window-frame show-toggle-fullscreen=&quot;false&quot;&gt;</div>
+      </div>
+      </div>
+      <div class="dox-corejobs"></div>
+      </div>
+
+      </section>
+
+      <section id="#nd-node">
+      <h3>nd-node</h3>
+      <div class="dox-modules">
+          <div class="dox-module">
+              <div class="dox-name">config</div>
+              <div class="dox-description">gets configurations from ndjs file according to the current installer
+                  stage. parses templates through the state module</div>
+              <div class="dox-methods">
+                  <div class="dox-method">
+                      <div class="dox-name">getInstallerStage</div>
+                      <div class="dox-return">current installer stage (&#39;install&#39;, &#39;uninstall&#39; etc...)</div>
+                  </div>
+                  <div class="dox-method">
+                      <div class="dox-name">getConfig</div>
+                      <div class="dox-params">
+                          <div class="dox-param">
+                              <div class="dox-name">path</div>
+                              <div class="dox-description">{String} property path</div>
+                          </div>
+                      </div>
+                      <div class="dox-return">parsed value of the property if found</div>
+                      <div class="dox-example">getConfig(&#39;pages[2]&#39;) will return the 3rd page in the current
+                          install stage</div>
+                  </div>
+                  <div class="dox-method">
+                      <div class="dox-name">getOutgoingDir</div>
+                      <div class="dox-return">outgoing dir (should not be used on production)</div>
+                  </div>
+              </div>
+          </div>
+          <div class="dox-module">
+              <div class="dox-name">fs</div>
+              <div class="dox-description">file system operations</div>
+              <div class="dox-methods">
+                  <div class="dox-method">
+                      <div class="dox-name">getWorkingDir</div>
+                      <div class="dox-return">current working dir</div>
+                  </div>
+              </div>
+          </div>
+          <div class="dox-module">
+              <div class="dox-name">job</div>
+              <div class="dox-description">job queue operations</div>
+              <div class="dox-methods">
+                  <div class="dox-method">
+                      <div class="dox-name">getAllJobs</div>
+                      <div class="dox-description">registered as UI action</div>
+                      <div class="dox-return">return all jobs names from the current install stage in ndfile</div>
+                  </div>
+                  <div class="dox-method">
+                      <div class="dox-name">getRegisteredJobTypes</div>
+                      <div class="dox-return">all registered job types and creation callbacks</div>
+                  </div>
+                  <div class="dox-method">
+                      <div class="dox-name">getAllJobs</div>
+                      <div class="dox-params">
+                          <div class="dox-param">
+                              <div class="dox-name">path</div>
+                              <div class="dox-description">{String} property path</div>
+                          </div>
+                      </div>
+                      <div class="dox-return">parsed value of the property if found</div>
+                      <div class="dox-example">getConfig(&#39;pages[2]&#39;) will return the 3rd page in the current
+                          install stage</div>
+                  </div>
+                  <div class="dox-method">
+                      <div class="dox-name">retryJob</div>
+                      <div class="dox-description">registered UI action - retry a job marked as error</div>
+                      <div class="dox-params">
+                          <div class="dox-param">
+                              <div class="dox-name">idx</div>
+                              <div class="dox-description">{Number} index of retry job in retry queue</div>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="dox-method">
+                      <div class="dox-name">ignoreRetryJob</div>
+                      <div class="dox-description">registered UI action - ignore a job marked as error</div>
+                      <div class="dox-params">
+                          <div class="dox-param">
+                              <div class="dox-name">idx</div>
+                              <div class="dox-description">{Number} index of retry job in retry queue</div>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="dox-method">
+                      <div class="dox-name">abortRetryJob</div>
+                      <div class="dox-description">registered UI action - abort a job marked as error</div>
+                      <div class="dox-params">
+                          <div class="dox-param">
+                              <div class="dox-name">idx</div>
+                              <div class="dox-description">{Number} index of retry job in retry queue</div>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="dox-method">
+                      <div class="dox-name">startNamedJob</div>
+                      <div class="dox-description">registered UI action</div>
+                      <div class="dox-params">
+                          <div class="dox-param">
+                              <div class="dox-name">name</div>
+                              <div class="dox-description">{String} name of job in ndfile.js</div>
+                          </div>
+                          <div class="dox-param">
+                              <div class="dox-name">force</div>
+                              <div class="dox-description">{Boolean} start even if the job was started</div>
+                          </div>
+                      </div>
+                      <div class="dox-return">parsed value of the property if found</div>
+                      <div class="dox-example">startNamedJob(main&#39;) will start job &#39;main&#39; of the current
+                          install stage</div>
+                  </div>
+              </div>
+              <div class="dox-corejobs">
+                  <div class="dox-corejob">
+                      <div class="dox-name">extract</div>
+                      <div class="dox-description">extract files compressed into the installer file (mocks by copy during
+                          debug) thorw retry error when insufficient premmissions</div>
+                      <div class="dox-example">settings example {&#39;type&#39;:&#39;extract&#39;,&#39;settings&#39;:{&#39;files&#39;:[
+                          {&#39;from&#39;:&#39;tomcat&#39;,&#39;to&#39;:&#39;&lt;%=user.config.installDir%&gt;&#39;,&#39;size&#39;:109},
+                          {&#39;from&#39;:&#39;jre&#39;,&#39;to&#39;:&#39;&lt;%=user.config.installDir%&gt;/jre&#39;,&#39;size&#39;:93},
+                          {&#39;from&#39;:&#39;webapp&#39;,&#39;to&#39;:&#39;&lt;%=user.config.installDir%&gt;/webapps/ROOT&#39;,&#39;size&#39;:0}]}}</div>
+                  </div>
+                  <div class="dox-corejob">
+                      <div class="dox-name">multi</div>
+                      <div class="dox-description">run sub jobs one after the other</div>
+                  </div>
+              </div>
+          </div>
+          <div class="dox-module">
+              <div class="dox-name">notifications</div>
+              <div class="dox-description">push notifications to UI</div>
+              <div class="dox-methods">
+                  <div class="dox-method">
+                      <div class="dox-name">getNotificationsFromIdx</div>
+                      <div class="dox-description">registered UI action</div>
+                      <div class="dox-params">
+                          <div class="dox-param">
+                              <div class="dox-name">idx</div>
+                              <div class="dox-description">{Number}</div>
+                          </div>
+                      </div>
+                      <div class="dox-return">get all notfications starting from this idx</div>
+                  </div>
+                  <div class="dox-method">
+                      <div class="dox-name">pushNotification</div>
+                      <div class="dox-description">push notfications to UI</div>
+                      <div class="dox-params">
+                          <div class="dox-param">
+                              <div class="dox-name">name</div>
+                              <div class="dox-description">{String} name of event</div>
+                          </div>
+                          <div class="dox-param">
+                              <div class="dox-name">value</div>
+                              <div class="dox-description">{Object} event data</div>
+                          </div>
+                      </div>
+                      <div class="dox-example">pushNotification(&#39;downloadComplete&#39;,{package:abc.zip})</div>
+                  </div>
+              </div>
+          </div>
+          <div class="dox-module">
+              <div class="dox-name">pages</div>
+              <div class="dox-description">pages handling</div>
+              <div class="dox-methods">
+                  <div class="dox-method">
+                      <div class="dox-name">getPages</div>
+                      <div class="dox-return">all pages an their current data for current installation stage</div>
+                  </div>
+              </div>
+          </div>
+          <div class="dox-module">
+              <div class="dox-name">state</div>
+              <div class="dox-description">installer stage - holds settings set from the UI</div>
+              <div class="dox-methods">
+                  <div class="dox-method">
+                      <div class="dox-name">getSettings</div>
+                      <div class="dox-params">
+                          <div class="dox-param">
+                              <div class="dox-name">settingsPath</div>
+                              <div class="dox-description">{String} property path of the settings</div>
+                          </div>
+                          <div class="dox-param">
+                              <div class="dox-name">defaultValue</div>
+                              <div class="dox-description">{Object} defualt value to be returned of property not found</div>
+                          </div>
+                      </div>
+                      <div class="dox-return">current value of .settingsPath or defaultValue if not found</div>
+                  </div>
+                  <div class="dox-method">
+                      <div class="dox-name">setSettings</div>
+                      <div class="dox-description">setUserSettings ui actions calls this function with .user prefix. this
+                          functions set current state</div>
+                      <div class="dox-params">
+                          <div class="dox-param">
+                              <div class="dox-name">settingsPath</div>
+                              <div class="dox-description">{String} name of event</div>
+                          </div>
+                          <div class="dox-param">
+                              <div class="dox-name">value</div>
+                              <div class="dox-description">{Object}</div>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="dox-method">
+                      <div class="dox-name">parseTemplate</div>
+                      <div class="dox-params">
+                          <div class="dox-param">
+                              <div class="dox-name">str</div>
+                              <div class="dox-description">{String} name of event</div>
+                          </div>
+                      </div>
+                      <div class="dox-return">lodash template parsed value of str according to current state</div>
+                  </div>
+              </div>
+          </div>
+          <div class="dox-module">
+              <div class="dox-name">state</div>
+              <div class="dox-description">installer stage - holds settings set from the UI</div>
+              <div class="dox-methods">
+                  <div class="dox-method">
+                      <div class="dox-name">getRegisteredActions</div>
+                      <div class="dox-description">get currently registered UI actions</div>
+                      <div class="dox-return">mapping action-name -&gt; array of param-names</div>
+                  </div>
+                  <div class="dox-method">
+                      <div class="dox-name">registerAction</div>
+                      <div class="dox-description">register a new UI action</div>
+                      <div class="dox-params">
+                          <div class="dox-param">
+                              <div class="dox-name">name</div>
+                              <div class="dox-description">{String} name of event</div>
+                          </div>
+                          <div class="dox-param">
+                              <div class="dox-name">paramNames</div>
+                              <div class="dox-description">{Array} array of paramerter names</div>
+                          </div>
+                          <div class="dox-param">
+                              <div class="dox-name">action</div>
+                              <div class="dox-description">{Function} callback of action( could be syncronous or retrun a pormise)</div>
+                          </div>
+                      </div>
+                      <div class="dox-example">rregisterAction(&#39;getNotificationsFromIdx&#39;,[&#39;idx&#39;],getNotificationsFromIdx)</div>
+                  </div>
+                  <div class="dox-method">
+                      <div class="dox-name">pushNotification</div>
+                      <div class="dox-description">push notfications to UI</div>
+                      <div class="dox-params">
+                          <div class="dox-param">
+                              <div class="dox-name">name</div>
+                              <div class="dox-description">{String} name of event</div>
+                          </div>
+                          <div class="dox-param">
+                              <div class="dox-name">value</div>
+                              <div class="dox-description">{Object} sevent data</div>
+                          </div>
+                      </div>
+                      <div class="dox-example">pushNotification(&#39;downloadComplete&#39;,{package:abc.zip})</div>
+                  </div>
+                  <div class="dox-method">
+                      <div class="dox-name">getSortedByDepends</div>
+                      <div class="dox-params">
+                          <div class="dox-param">
+                              <div class="dox-name">moduleLoaders</div>
+                              <div class="dox-description">array of moduleLoader s</div>
+                          </div>
+                      </div>
+                      <div class="dox-return">array of module loaders topologically sorted by dependencies(dependencies
+                          comes before dependents)</div>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <div class="dox-services"></div>
+      <div class="dox-directives"></div>
+
+      </div>
+
+      </section>
     </div>
   </div>
 

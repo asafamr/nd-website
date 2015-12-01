@@ -1,0 +1,95 @@
+.dox-description:before {
+
+}
+.dox-name{
+  display:inline;
+}
+.dox-name:before {
+
+}
+.dox-params:before{
+  content: 'Parameters: ';
+}
+.dox-params .dox-type{
+  display:inline;
+  padding-left:10px;
+  font-style: italic;
+}
+.dox-params .dox-description{
+  display:inline;
+  padding-left:10px;
+}
+.dox-service:before {
+    content: 'Service: ';
+}
+.dox-directive:before {
+    content: 'Directive: ';
+}
+.dox-example:before {
+    content: 'Example: ';
+}
+.dox-module:before {
+    content: 'Module: ';
+}
+.dox-method:before {
+    content: 'Method: ';
+}
+.dox-return:before {
+    content: 'Returns: ';
+}
+.dox-module{
+  padding: 10px;
+  border: 1px solid;
+  margin: 5px;
+  border-radius: 3px;
+  background-color: #B5E0B8
+}
+.dox-method{
+  padding: 10px;
+  border: 1px solid;
+  margin: 5px;
+  border-radius: 3px;
+  background-color: #D6DCE4;
+}
+.dox-directive{
+  padding: 10px;
+  border: 1px solid;
+  margin: 5px;
+  border-radius: 3px;
+  background-color: #DECFAE;
+}
+.dox-params{
+  padding: 5px;
+}
+.dox-corejobs:before {
+    content: 'Core jobs:';
+}
+.dox-corejobs{
+  padding: 10px;
+  border: 1px solid;
+  margin: 5px;
+  border-radius: 3px;
+      background-color: #ccc
+}
+.dox-description:before
+{
+  content:'Description:'
+}
+.dox-param .dox-description:before
+{
+  content:''
+}
+.dox-corejob{
+  padding: 10px;
+  border: 1px solid;
+  margin: 5px;
+  border-radius: 3px;
+      background-color: #ccc
+}
+.dox-service{
+  padding: 10px;
+  border: 1px solid;
+  margin: 5px;
+  border-radius: 3px;
+  background-color: #E0B5B5;
+}

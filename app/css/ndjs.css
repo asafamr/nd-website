@@ -390,6 +390,7 @@ footer .footer-below {
 #ndjs-logo
 {
   width:250px;
+  height: 250px;
   margin-bottom:-50px;
   margin-top:-40px;
 }
@@ -472,8 +473,9 @@ background-color: white;
   margin: auto;
 }
 .git-link{
+  z-index: 30;
   position: absolute;
-  top: 10px;
+  top: 53px;
   right: 10px;
   font-size: 40px;
 
@@ -486,8 +488,9 @@ background-color: white;
   color: #8E9BB1;
 }
 .waffle-link{
+    z-index: 30;
   position: absolute;
-  top: 16px;
+  top: 58px;
   right: 45px;
   font-size: 40px;
 }

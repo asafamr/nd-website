@@ -361,6 +361,15 @@ module.exports = function (grunt) {
         'imagemin',
         'svgmin'
       ]
+    },
+    apibuild:
+    {
+      options:
+      {
+        ndNodeSrcGlob:require('path').resolve('../nd-node/src')+'/**/*js',
+        ndAngualrSrcGlob:require('path').resolve('../nd-angular/src')+'/**/*js'
+
+      }
     }
   });
 
@@ -380,6 +389,8 @@ module.exports = function (grunt) {
       'watch'
     ]);
   });
+
+  grunt.loadTasks('buildtools/tasks');
 
   grunt.registerTask('server', function (target) {
     grunt.log.warn('The `server` task has been deprecated. Use `grunt serve` to start a server.');

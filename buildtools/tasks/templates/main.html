@@ -1,0 +1,106 @@
+<!-- rendered automatically-->
+{{#*inline "params" }}
+{{#if this.params}}
+Parameters:
+<ul class="dox-method-params">
+  {{#each this.params}}
+  <li>
+    <div class="dox-param-name">{{this.name}}</div>
+    {{#if this.type}}
+    <div class="dox-param-type">{{this.type}}</div>
+    {{/if}}
+    {{#if this.description}}
+    <div class="dox-param-description">{{this.description}}</div>
+    {{/if}}
+  </li>
+  {{/each}}
+</ul>
+{{/if}}
+{{/inline}}
+
+{{#*inline "method" class objname}}
+<div class="dox-method" >
+  <a name="{{objname}}-{{this.name}}"></a>
+  <div class="dox-method-sign">{{objname}}.{{this.name}}{{paramarray this.params}}</div>
+  {{#if this.description}}
+  <div class="dox-{{class}}-description">Description: {{this.description}}</div>
+  {{/if}}
+  {{> params}}
+  {{#if this.return}}
+  <div class="dox-{{class}}-return">Returns: {{this.return}}</div>
+  {{/if}}
+  {{#if this.example}}
+  <div class="dox-{{class}}-example">Example: {{this.example}}</div>
+  {{/if}}
+</div>
+{{/inline}}
+
+
+<div class="dox-front">
+  <h3>nd-angular</h3>
+  <div class="dox-module-description">{{angular.modules.0.description}}</div>
+  <div class="dox-services">
+    <h3>services</h3>
+    {{#each angular.services as | service |}}
+    <div class="dox-service" >
+      <a name="{{this.name}}"></a>
+      <div class="dox-service-name">{{this.name}}</div>
+      <div class="dox-service-description">{{this.description}}</div>
+      {{#if this.methods}}
+      <div class="dox-methods">
+        {{#each this.methods}}
+        {{> method class="service" objname=service.name}}
+        {{/each}}
+      </div>
+      {{/if}}
+    </div>
+    {{/each}}
+  </div>
+  <div class="dox-directives">
+    <h3>directives</h3>
+    {{#each angular.directives as | dir |}}
+    <div class="dox-directive">
+      <a name="{{this.name}}"></a>
+      <div class="dox-directive-name">{{this.name}}</div>
+      <div class="dox-directive-description">Description: {{this.description}}</div>
+      {{> params}}
+      {{#if this.example}}
+      <div class="dox-directive-example">Example: {{this.example}}</div>
+      {{/if}}
+    </div>
+    {{/each}}
+  </div>
+</div>
+
+<div class="dox-back">
+  <h3>nd-node</h3>
+  <div class="dox-modules">
+    <h3>modules</h3>
+    {{#each node.modules as | module |}}
+    <div class="dox-module">
+      <a name="{{this.name}}"></a>
+      <div class="dox-module-name">{{this.name}}</div>
+      <div class="dox-module-description">{{this.description}}</div>
+      {{#if this.methods}}
+      <div class="dox-methods">
+        {{#each this.methods}}
+        {{> method class="module" objname=module.name}}
+        {{/each}}
+      </div>
+      {{/if}}
+      {{#if this.jobs}}
+      <div class="dox-jobs">
+        <h4>Core job types:</h4>
+        {{#each this.jobs}}
+        <div class="dox-job">
+          <div class="dox-job-name">{{this.name}}</div>
+          <div class="dox-job-description">{{this.description}}</div>
+        </div>
+        {{/each}}
+      </div>
+      {{/if}}
+    </div>
+    {{/each}}
+  </div>
+</div>
+<!-- end rendered automatically-->

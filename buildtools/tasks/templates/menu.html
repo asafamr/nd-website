@@ -1,0 +1,70 @@
+
+<!-- rendered automatically -->
+<div class="dox-menu-side-menu">
+  <div class="dox-menu-front">
+    <div class="dox-menu-component">nd-angular</div>
+    <div class="dox-menu-services">
+      <h4>Services</h4>
+      {{#each angular.services as | service |}}
+      <div class="dox-menu-service">
+        <a href="{{this.name}}"><div class="dox-menu-service-name">{{this.name}}</div></a>
+        {{#if this.methods}}
+        <div class="dox-menu-methods">
+          {{#each this.methods}}
+          <div class="dox-menu-method">
+            <a href="#{{service.name}}-{{this.name}}"><div class="dox-menu-method-name">
+              {{this.name}}
+            </div></a>
+          </div>
+          {{/each}}
+        </div>
+        {{/if}}
+      </div>
+      {{/each}}
+    </div>
+    <div class="dox-menu-directives">
+      <h4>Directives</h4>
+      {{#each angular.directives as | dir |}}
+      <div class="dox-menu-service">
+        <a href="#{{this.name}}"><div class="dox-menu-service-name">{{this.name}}</div></a>
+
+      </div>
+      {{/each}}
+    </div>
+  </div>
+  <div class="dox-menu-back">
+    <div class="dox-menu-component">nd-node</div>
+    <div class="dox-menu-modules">
+      <h4>Modules</h4>
+      {{#each node.modules as | module |}}
+      <div class="dox-menu-module">
+        <a href="#{{this.name}}"><div class="dox-menu-module-name">{{this.name}}</div></a>
+        {{#if this.methods}}
+        <div class="dox-menu-methods">
+          {{#each this.methods}}
+          <div class="dox-menu-method">
+            <a href="#{{module.name}}-{{this.name}}"><div class="dox-menu-method-name">
+              {{this.name}}
+            </div></a>
+          </div>
+          {{/each}}
+        </div>
+        {{/if}}
+        {{#if this.jobs}}
+        <div class="dox-menu-corejobs">
+        <h4>Core jobs</h4>
+        <div class="dox-menu-jobs">
+          {{#each this.jobs}}
+          <div class="dox-menu-job">
+            <div class="dox-menu-job-name">{{this.name}}</div>
+          </div>
+          {{/each}}
+        </div>
+      </div>
+        {{/if}}
+      </div>
+      {{/each}}
+    </div>
+  </div>
+</div>
+<!-- end rendered automatically-->

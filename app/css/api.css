@@ -1,95 +1,180 @@
-.dox-description:before {
-
+body{
+  font-family: 'PT Sans', sans-serif;
+  background-color: #CCCCCC;
 }
-.dox-name{
-  display:inline;
+.container{
+  max-width: 700px;
+  min-width: 700px;
+  padding-left: 0;
+  background-color: #EEEEEE;
+  border-right: 1px solid #9A9A9A;
+  border-left: 1px solid #9A9A9A;
 }
-.dox-name:before {
-
-}
-.dox-params:before{
-  content: 'Parameters: ';
-}
-.dox-params .dox-type{
-  display:inline;
-  padding-left:10px;
-  font-style: italic;
-}
-.dox-params .dox-description{
-  display:inline;
+.api-packages
+{
   padding-left:10px;
 }
-.dox-service:before {
-    content: 'Service: ';
-}
-.dox-directive:before {
-    content: 'Directive: ';
-}
-.dox-example:before {
-    content: 'Example: ';
-}
-.dox-module:before {
-    content: 'Module: ';
-}
-.dox-method:before {
-    content: 'Method: ';
-}
-.dox-return:before {
-    content: 'Returns: ';
-}
-.dox-module{
-  padding: 10px;
-  border: 1px solid;
-  margin: 5px;
-  border-radius: 3px;
-  background-color: #B5E0B8
-}
-.dox-method{
-  padding: 10px;
-  border: 1px solid;
-  margin: 5px;
-  border-radius: 3px;
-  background-color: #D6DCE4;
-}
-.dox-directive{
-  padding: 10px;
-  border: 1px solid;
-  margin: 5px;
-  border-radius: 3px;
-  background-color: #DECFAE;
-}
-.dox-params{
-  padding: 5px;
-}
-.dox-corejobs:before {
-    content: 'Core jobs:';
-}
-.dox-corejobs{
-  padding: 10px;
-  border: 1px solid;
-  margin: 5px;
-  border-radius: 3px;
-      background-color: #ccc
-}
-.dox-description:before
+.api-packages .package-name
 {
-  content:'Description:'
+  background-color: #D7DADE;
 }
-.dox-param .dox-description:before
+
+.api-packages hr
 {
-  content:''
+  padding:5px 5px;
 }
-.dox-corejob{
+.api-packages ul
+{
+  list-style-type: none;
   padding: 10px;
-  border: 1px solid;
-  margin: 5px;
-  border-radius: 3px;
-      background-color: #ccc
 }
-.dox-service{
-  padding: 10px;
-  border: 1px solid;
+.api-packages li
+{
+  border: 1px solid #D6D6D6;
+  border-radius: 4px;
   margin: 5px;
+}
+.api-packages li div
+{
+  padding: 3px;
+}
+.api-packages .package-name
+{
+  font-size: 1.2em;
+}
+.duck-icon
+{
+  background-image: url(../img/duck.png);
+  width:200px;
+  height:200px;
+  background-size: contain;
+  position: absolute;
+  margin-left: -10px;
+}
+.header-spacer
+{
+  height:200px;
+}
+.left-side
+{
+  color: white;
+  background-color: #1F2735;
+  height: 100%;
+}
+.right-side
+{
+  padding-left: 30px;
+}
+.header-title
+{
+  position: absolute;
+  font-size: 35px;
+  top: 160px;
+  width: 180px;
+  text-align: center;
+  font-weight: 700;
+  text-shadow: 2px 2px 1px rgba(0, 0, 0, 0.61);
+}
+
+.dox-menu-method-name {
+  font-size: 0.8em;
+  padding-left: 10px;
+}
+.dox-menu-service-name {
+  font-size: 1.2em;
+}
+.row {
+    display: table;
+}
+
+[class*="col-"] {
+    float: none;
+    display: table-cell;
+    vertical-align: top;
+}
+.dox-menu-component{
+  font-size: 24px;
+    background-color: #FFFFFF;
+    border: 1px solid #1F2735;
+    color: #1F2735;
+    margin-left: -15px;
+    margin-right: -25px;
+    text-align: center;
+    font-weight: 700;
+    padding: 2px;
+}
+.dox-menu-corejobs
+{
+  padding:5px;
   border-radius: 3px;
-  background-color: #E0B5B5;
+  background-color: #404752;
+  font-size: 0.8em;
+}
+.dox-menu-corejobs h4
+{
+  font-size: 1em;
+
+}
+
+.right-side .dox-service-name {
+    font-size: 25px;
+    font-weight: 700;
+    margin-top: 50px;
+}
+
+.dox-method-sign
+{
+  padding:10px;
+  font-weight: 700;
+}
+
+.dox-method-params
+{
+  list-style-type: none;
+}
+.dox-param-name {
+    font-weight: 700;
+    display: inline;
+}
+.dox-param-type {
+    font-style: italic;
+    padding-left: 10px;
+    display: inline;
+}
+.dox-param-description {
+    display: inline;
+    padding-left: 10px;
+    font-size: 0.9em;
+}
+
+.right-side .dox-directive-name {
+    font-size: 25px;
+    font-weight: 700;
+    margin-top: 50px;
+}
+.right-side .dox-module-name {
+    font-size: 25px;
+    font-weight: 700;
+    margin-top: 50px;
+}
+.dox-method {
+    margin-top: 13px;
+}
+.dox-job-name {
+    font-size: 15px;
+    margin-top: 15px;
+    font-weight: 700;
+}
+a.gitlink {
+    color: #1F2735;
+    float: right;
+}
+a.gitlink:hover {
+    color:#6E86B1;
+}
+span.language {
+    font-size: 12px;
+    padding-left: 10px;
+    font-style: italic;
+    color: #6A6A6B;
 }

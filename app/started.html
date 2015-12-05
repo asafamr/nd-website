@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>NDJS installer framework</title>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha256-7s5uDGW3AHqw6xtJmNNtr+OBRJUlgkNJEo78P4b0yRw= sha512-nNo+yCHEyn0smMxSswnf/OnX6/KwJuZTlNZBjauKhTK0c+zT+q5JOCx0UFhXQ6rJR9jg6Es8gPuD2uZcYDLqSw==" crossorigin="anonymous">
+  <link href='https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+  <link href="css/prism.css" rel="stylesheet" type='text/css'>
+  <link href="css/started.css" rel="stylesheet" type='text/css'>
+
+
+
+</head>
+
+<body  class="index">
+  <div class="container page-header"><img id="started-logo" src="img/duck.png"> <h2>Getting started with NDJS</h2></div>
+  <div class="container">
+    <div class="row">
+    <div class="col-xs-12">
+      <h3>Table of contents</h3>
+      <ul>
+        <li><a href="#prereq">Prerequisites</a></li>
+        <li><a href="#starter">Getting the NDJS starter project</a></li>
+        <li><a href="#workflow">NDJS pages and jobs</a></li>
+        <li><a href="#architecture">NDJS architecture</a></li>
+        <li><a href="#ndjspage">Creating a page</a></li>
+        <li><a href="#ndjsmodule">Creating a custom module</a></li>
+        <li><a href="#debugging">Putting it all together - debugging with nd_debug</a></li>
+        <li><a href="#compile">Compiling the installer</a></li>
+      </ul>
+    </div>
+  </div>
+  </div>
+<section id="prereq">
+  <div class="container">
+    <div class="row">
+    <div class="col-xs-12">
+      <h3>Prerequisites</h3>
+      <p>This tutorial assumes some basic knowledge of HTML, CSS and JavaScript in general and more specifically:
+      <a href="https://angularjs.org/" target="_blank">Angular JS</a> and <a href="https://nodejs.org/" target="_blank">Node JS.</a>
+      <br>NDJS requires Node JS to be installed globally. You can download the latest Node JS from: <a href="https://nodejs.org">Node JS website</a>
+      <br>Once Node JS is installed, the Bower and Grunt packages need to be installed globally by running:
+      <br><code class="shell">npm install -g bower grunt</code>
+      <br>It is recommended to download and install Git cli from <a href="https://git-scm.com/">Git website</a> in order to download the starter project.
+      <br>We recommend developing for NDJS with the <a href="https://www.google.com/chrome/browser/desktop/">Chrome web browser</a>
+      <br>Lastly, You'll also need a code editor. We really like the <a href="https://atom.io/">Atom code editor</a>
+      </p>
+    </div>
+  </div>
+  </div>
+</section>
+<section id="starter">
+  <div class="container">
+    <div class="row">
+    <div class="col-xs-12">
+      <h3>Getting the NDJS starter project</h3>
+      <p>NDJS starter project can be found at <a href="https://github.com/asafamr/nd-proj">GitHub</a></p>
+      <p>You can get it by git cloning it to a new directory (This will create a new directory named ndjs-starter):
+      <br><code class="shell">git clone https://github.com/asafamr/nd-proj ndjs-starter</code>
+      <br>If you prefer you can just download it as a zip file from <a href="https://github.com/asafamr/nd-proj/archive/master.zip">here</a></p>
+      <p>The starter project is an example NDJS installer
+      <br>In order to demonstrate NDJS capabilites it installs an Apache Tomcat server with a custom web appplication.
+      <br>If you are not familiar with Java and Apache Tomcat, don't worry and go ahead - it's not required.
+      <br><br>In order to keep the starter project small Apache Tomcat and the Java Runtime Environment should be downloaded separately but first let's go over the installer project directory structure...</p>
+      <h4>Directory structure of the project</h4>
+      <p>NDJS expects several sub directories in our installer project directory (we'll later cover these in more detail):
+        <ul>
+          <li>front directory - user interface </li>
+          <li>back directory - jobs and tasks</li>
+          <li>outgoing directory - files to be packed into the installer and later extracted during the installation process</li>
+          <li>etc directory - additional files such as the installer icon</li>
+        </ul>
+      </p>
+      <p>Apache Tomcat and the Java Runtime Environment are not checked in with the project and need to be downloaded manually and extracted to the outgoing directory:</p>
+      <p>Apache Tomcat should be downloaded from <a href="http://tomcat.apache.org/download-80.cgi">here</a> and extracted to (project-dir)/outgoing/tomcat</p>
+      <p>Java Runtime Environment 8 should be downloaded from <a href="http://www.oracle.com/technetwork/java/javase/downloads/jre8-downloads-2133155.html">here</a> and extracted to (project-dir)/outgoing/jre</p>
+      <p>Now let's download backend dependencies from npm (Node package manager) by running:</p>
+      <code class="shell">npm install</code>
+      <p>And frontend dependencies from Bower by running:</p>
+      <code class="shell">bower install</code>
+      <p>Good Job! All set and ready</p>
+    </div>
+  </div>
+  </div>
+</section>
+<section id="workflow">
+  <div class="container">
+    <div class="row">
+    <div class="col-xs-12">
+      <h3>NDJS pages and jobs</h3>
+
+      <p>NDJS organizes views into <span class="some-phrase">pages</span>. Examples of pages could be:
+        End user license agreement page,
+        required components selection page or simply a welcome page.
+        Pages are ordered and NDJS provides a mechanism to navigate between them.
+      </p>
+      <p>Time consuming operations done by the installer such as files
+        extraction and package download are organized into named <span class="some-phrase">jobs</span>.
+        NDJS provides a mechanism for controlling jobs and querying their progress.
+      </p>
+      <p>We'll later cover NDJS pages and jobs in more detail.
+      </p>
+      <p>NDJS installers can also have several running modes or <span class="some-phrase">install stages</span>
+        <br>Example installer stages could be 'install', 'update' and 'uninstall'.
+        each of the install stages has its own set of pages and jobs.
+      </p>
+      <p> Install stages, pages and jobs are all configured in the ndfile.js configuration file. Let's look at an example.
+      </p>
+      <h3>ndfile.js</h3>
+<pre class="line-numbers" data-line="5,23,25,27,29,31">
+<code class="language-javascript">module.exports = function (ndjs) {
+'use strict';
+    ndjs.initConfig(
+{
+  'options':/* global options*/
+  {
+    'frontend':'front',
+    'backend':'back',
+    'outgoing':'outgoing',
+    'etc':'etc',
+    'window':
+    {
+      'frame':false,
+      'width': 720,
+      'height': 440,
+    },
+    'description':'my first NDJS installer',
+    'productname':'my NDJS installer',
+    'company':'ACME',
+    'version':'1.0.0.0',
+    'icon':'duck.ico'
+  },
+	'install':/* install stage*/
+	{
+		'pages':/* pages for the install stage */
+		[
+      'welcome','eula','config','extract','conclusion'
+		],
+		'jobs':
+		{
+      'main': /* a job called main in the install stage*/
+			{'type':'multi','settings':
+        {'subJobs':[
+          {'type':'extract','settings':{'files':[
+            {'from':'tomcat','to':'<%=user.config.installDir%>','size':109},
+            {'from':'jre','to':'<%=user.config.installDir%>/jre','size':93},
+            {'from':'webapp','to':'<%=user.config.installDir%>/webapps/ROOT','size':0}]}},
+          {'type':'myConfig'}
+          ]}}
+		}
+	}
+});
+};</code></pre>
+
+
+      <p>ndfile.js format is inspired by the grunt file format.
+      </p>
+      <p>
+        This ndfile.js first defines global options for the installer(line 5).
+      </p>
+      <p>
+        Then, an 'install' stage is defined for which there are five pages:
+        'welcome', 'eula', 'config', 'extract', 'conclusion'(line 27).
+        <br>The install stage also defines a job named 'main' and its function(line 31).
+      </p>
+      <p>
+        Also note that some parameters are templated: <%=user.config.installDir%>
+         they will be parsed and replaced when needed according to the current state of the installer.
+      </p>
+    </div>
+  </div>
+  </div>
+</section>
+
+<section id="architecture">
+  <div class="container">
+    <div class="row">
+    <div class="col-xs-12">
+      <h3>NDJS architecture</h3>
+      <p>Before we continue, some notes on NDJS architecture. NDJS has two main components:
+        <ul>
+          <li>Node backend</li>
+          <li>Angular frontend</li>
+        </ul>
+      </p>
+      <p>The <span class="some-phrase">Node backend</span> of NDJS is the main component of NDJS: It runs jobs,
+        reports their progress, parses configuration files etc...</p>
+      <p>The <span class="some-phrase">Angular frontend</span> displays the user interface and views and send commands back to the backend.</p>
+      <p>The two of them communicate using two main mechanisms:
+        <br><span class="some-phrase">actions</span> (frontend -> backend)
+        <br>and <span class="some-phrase">notifications</span> (backend -> frontend).</p>
+      <p>An action example: start files extraction.
+      <br>Another example could be an action for checking if a network port is open -
+        this action returns a response: whether the port is actually open.</p>
+      <p>Notifications are pushed from backend to frontend. An example:
+        a notification that a job has finished</p>
+      <p>The Node backend has a module mechanism that allows you to plug-in your own custom modules.
+        Then, your modules can defines actions and custom jobs which could be triggered from the UI.More on this later on.</p>
+    </div>
+  </div>
+  </div>
+</section>
+
+<section id="ndjspage">
+  <div class="container">
+    <div class="row">
+    <div class="col-xs-12">
+      <h3>Creating a page</h3>
+      <p>NDJS frontend uses a regular Angular application for its user interface.
+        This lets you reuse packages from Bower made for angular for various tasks.</p>
+      <p>As described above, NDJS user interface is organized into pages.
+        Let's see how pages are created.
+      </p>
+      <p>The installation pages are defined in the ndfile.js configuration file. In our example the installation stage defines five pages:
+      </p>
+      <pre ><code class="language-javascript">'pages':
+[
+  'welcome','eula','config','extract','conclusion'
+],</code></pre>
+      <p>Each page has its own directory under the (project-dir)/front/views directory. We'll focus on the welcome page.
+      </p>
+      <p>NDJS looks for (project-dir)/front/views/(page-name)/(page-name).html for the page template.
+        It is convenient to also create an Angular controller in the same directory and use it in our template.
+        Our welcome page is rather simple and actually does not require any view logic.
+        It is stylized by CSS to give it the look and feel we require.
+      </p>
+      <p>NDJS registers the pages as ui.router paths for us, if you are not familiar with ui.router,
+         no worries, for most cases NDJS paging interface (ndPager) is enough.
+        The ndPager interface is covered in detail in the <a href="/api.html">API section</a>
+      </p>
+      <p>A more complex view is the config page view:</p>
+      <pre class="line-numbers" data-line="1-3,13-16"><code class="language-javascript">ConfigController.$inject=['$scope','ndActions','ndPager'];
+/* inject angular $scope and two NDJS services: ndActions and ndPager*/
+function ConfigController($scope,ndActions,ndPager)
+{
+  var vm=this;
+  /*...*/
+  function checkPort(number,out)
+  {
+    if(!isValidPort(number))
+    {
+      vm[out]='closed';
+    }
+    ndActions.checkPortOpen(number).then(
+      function(isOpen){
+        vm[out]=isOpen&&'open'||'closed';
+      });
+  }
+  /*...*/
+}
+</code></pre>
+      <p>The view controller requires the injection of two NDJS services:
+        ndActions and ndPager. ndActions is responsible for calling callback actions
+        registered in the Node backend of NDJS.
+        The action checkPortOpen was registered in the backend and now is available in the frontend.
+        <br>checkPortOpen returns with an answer to update our view.
+        <br>The ndActions service uses <a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Promise">promises</a>.
+        <br>The ndPager service is used here to prevent the user from continuing
+        before the configurations entered are valid.
+        <br>More on the Angular services and directives of NDJS frontend in the
+        <a href="/api.html">API section</a></p>
+    </div>
+  </div>
+  </div>
+</section>
+
+<section id="ndjsmodule">
+  <div class="container">
+    <div class="row">
+    <div class="col-xs-12">
+      <h3>Creating a custom module</h3>
+      <p>NDJS allows extension through the use of modules.
+        Registering a custom module allows you to add custom functionality required.
+        The framework looks for modules in the back directory of the project.
+        In our starter project myModule.js file registers a new custom module - Let's inspect its content...
+</p>
+<pre class="line-numbers" data-line="9,12,13,18,26,60-63"><code class="language-javascript">'use strict';
+
+var portastic = require('portastic');
+var BBPromise = require('bluebird');
+var fs = require('fs');
+var writeFilePromisified=BBPromise.promisify(fs.writeFile);
+var path = require('path');
+
+module.exports=myModuleFactory;
+
+//these ndjs modules will be injected for us
+myModuleFactory.$inject=['$job','$uiActions','$utils','$state','$logger'];
+function myModuleFactory($job,$uiactions,$utils,$state,$logger)
+{
+  $logger.debug('registering myModule');
+  //we register two actions and one jobtype
+  //these two actions will later be available in the angualr ui frontend
+  $uiactions.registerAction(
+    'checkPortOpen'/*action name*/,
+    ['port']/*param names*/,
+    checkPortOpen/*callback function to run*/);
+  $uiactions.registerAction('runServer',[],runServer);
+  $uiactions.registerAction('getDefaultDir',[],getDefaultDir);
+
+  //register job type myConfig - specified to run in ndfile.js
+  $job.registerJobType(myConfigJobFactory,'myConfig');
+  function myConfigJobFactory()
+  {
+    //this job will configure apache tomcat to run on the end machine
+    //we first configure ports in conf/server.xml then specifying java's path
+    //in bin/setenv.bat
+    var userConfig=$state.getSettings('user.config');
+    var serverXmlPath=userConfig.installDir+'/conf/server.xml';
+    $logger.debug('setting http port');
+    return $utils.setXmlFileProps(
+      //returns a promise that when finished configured xml using xpath
+      serverXmlPath,
+      //keys are xpath to find - values replacement tokens
+      { '//Connector[@protocol="HTTP/1.1"]/@port' :userConfig.http,
+        '//Server/@port'                          :userConfig.shutdown})
+        .then(function(){
+          //chain another promise: write string to the setenv.bat file
+        return writeFilePromisified
+          (userConfig.installDir+'/bin/setenv.bat',
+          'SET JAVA_HOME='+userConfig.installDir+'\\jre');
+      }).then(function()
+    {
+      //create a property file
+      return writeFilePromisified
+        (userConfig.installDir+'/webapps/ROOT/WEB-INF/conf.properties',
+        'myserver.org.adminpass='+userConfig.adminPass);
+    });
+  }
+  /**
+  this function tests if -port- is open
+  it is registered as an action and will be available in the UI frontend
+  @param port port to open
+  @returns a promise resolving to true if port is open
+  **/
+  function checkPortOpen(port)
+  {
+    return portastic.test(port);//returns a promise
+  }
+  function runServer()
+  {
+    var installDir=$state.getSettings('user.config.installDir');
+    var binDir=path.join(installDir,'bin');
+    var runCmd=path.join(installDir,'bin','startup.bat');
+    return $utils.runShellCmdAndDetach(runCmd,[],binDir);//returns a promise
+  }
+  function getDefaultDir()
+  {
+    if(process.env.ProgramW6432){
+      return path.join(process.env.ProgramW6432,'my-server');
+    }
+    else
+    {
+      return path.join(process.env.programfiles,'my-server');
+    }
+  }
+  return {};//our module publish no interface
+}
+
+</code></pre>
+<p>
+  This module exports an NDJS module factory function (line 9).
+  Inspired by angular dependency injection system, NDJS inject other modules to our module by their name
+  (modules with names starting with $ are NDJS's built-in modules).
+  <br>
+  In line 18 we are registering an action for the UI: checkPortOpen,
+  we specify the parameter names and the callback function to call when this action is run.
+  <br>The callback fuction to be called when the action is called is defined in lines 60-63.
+  <br>We use a Node library called portastic to do the actual action: check if the port is open and return a promise.
+  <br>NDJS publish this action to the frontend and it will be available in the ndActions service.
+  <br>We'll see it in action later on.
+  <br>
+  In line 26 , we are registering a custom job type. It its later configured to run as part
+  of the 'main' job in our ndfile.js configuration file.
+  myConfigJobFactory is called to when a job of type myConfig is scheduled
+  to start.
+  In myConfig jobs, we use built-in NDJS functionality to configure an XML file
+  extracted with our installer in a previous extract job.
+</p>
+
+    </div>
+  </div>
+  </div>
+</section>
+<section id="debugging">
+  <div class="container">
+    <div class="row">
+    <div class="col-xs-12">
+      <h3>Putting it all together - debugging with nd_debug</h3>
+      <p>After configuring all jobs and pages we need to make sure everything works as planned.</p>
+      <p>To easily debug and develop with NDJS, NDJS provides the nd_debug grunt task.
+        It allows you to debug the installer in a browser environment and use browser debugging tools.
+      </p>
+      <p>Here is a short walkthrough video of using it. Click the links below the video to see each step.
+      </p>
+      <video id="started-vid" src="img/started/debugging.ogg" controls>
+        Your browser does not support the <code>video</code> element.
+      </video>
+      <h5>Click an headline to go to the matching step:</h5>
+      <div class="scrollable">
+        <ui>
+          <li> <a onclick="document.getElementById('started-vid').currentTime=0">Open the config view controller</a></li>
+          <li> <a onclick="document.getElementById('started-vid').currentTime=2">Set up a breakpoint in the frontend</a></li>
+          <li> <a onclick="document.getElementById('started-vid').currentTime=4">Open the myConfig custom backend module</a></li>
+          <li> <a onclick="document.getElementById('started-vid').currentTime=6">Set up a backend breakpoint on the checkPortOpen action</a></li>
+          <li> <a onclick="document.getElementById('started-vid').currentTime=12">Start the nd_debug task by running 'grunt nd_debug'</a></li>
+          <li> <a onclick="document.getElementById('started-vid').currentTime=15">nd_debug console opened in a new tab</a></li>
+          <li> <a onclick="document.getElementById('started-vid').currentTime=16">Restart the backend</a></li>
+          <li> <a onclick="document.getElementById('started-vid').currentTime=18">Open backend debugging console</a></li>
+          <li> <a onclick="document.getElementById('started-vid').currentTime=19">Backend debugging console opened in a new tab</a></li>
+          <li> <a onclick="document.getElementById('started-vid').currentTime=24">Go back to the nd_debug console and open frontend</a></li>
+          <li> <a onclick="document.getElementById('started-vid').currentTime=25">Frontend opened in a new tab</a></li>
+          <li> <a onclick="document.getElementById('started-vid').currentTime=29">Open the developer tools</a></li>
+          <li> <a onclick="document.getElementById('started-vid').currentTime=36">Emulate screen size to match the installer target size</a></li>
+          <li> <a onclick="document.getElementById('started-vid').currentTime=38">Screen size set</a></li>
+          <li> <a onclick="document.getElementById('started-vid').currentTime=41">Design the page HTML using chrome development tools</a></li>
+          <li> <a onclick="document.getElementById('started-vid').currentTime=46">Edit CSS (need to save later to file)</a></li>
+          <li> <a onclick="document.getElementById('started-vid').currentTime=49">Go to next page</a></li>
+          <li> <a onclick="document.getElementById('started-vid').currentTime=52.4">Accept the EULA and go to the config page</a></li>
+          <li> <a onclick="document.getElementById('started-vid').currentTime=57">Press check port</a></li>
+          <li> <a onclick="document.getElementById('started-vid').currentTime=62">The controller frontend breakpoint has been triggered</a></li>
+          <li> <a onclick="document.getElementById('started-vid').currentTime=65">You can add breakpoint to code lines, use watches to query values and run arbitrary code in the development tools</a></li>
+          <li> <a onclick="document.getElementById('started-vid').currentTime=66">Click 'Run' to continue execution</a></li>
+          <li> <a onclick="document.getElementById('started-vid').currentTime=70">Notification: backend breakpoint was triggered. Click to go there</a></li>
+          <li> <a onclick="document.getElementById('started-vid').currentTime=73">Node-Inspector provides an interface very similar to chrome's development tools. set up breakpoint, use watches and run code in a similar manner to debug the backend jobs and actions.</a></li>
+        </ui>
+      </div>
+
+    </p>
+
+    </div>
+  </div>
+  </div>
+</section>
+<section id="compile">
+  <div class="container">
+    <div class="row">
+    <div class="col-xs-12">
+      <h3>Compiling the installer</h3>
+      <p>After we have finished creating our modules and views,
+        the last thing we need to do is to compile our installer into an executable.
+        We do that by running the nd_compile task:
+        <br><code class="shell">grunt nd_compile</code>
+        <br>It will copy dependencies required for production, our code and the nwjs
+        binaries into one branded executable and put it in the build directory.
+        Our installer is ready.
+      </p>
+    </div>
+  </div>
+  </div>
+</section>
+<script src="js/prism.js"></script>
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-70857627-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+</body>
+
+</html>

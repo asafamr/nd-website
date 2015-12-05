@@ -1,0 +1,60 @@
+body{
+  font-family: 'PT Sans', sans-serif;
+  background-color: #CCCCCC;
+}
+.container{
+  max-width: 800px;
+  min-width: 800px;
+  padding-left: 20px 20px;
+  background-color: #EEEEEE;
+  border-right: 1px solid #9A9A9A;
+  border-left: 1px solid #9A9A9A;
+}
+code.shell
+{
+  padding: 7px;
+  line-height: 40px;
+  background-color: #272822;
+  font-size: 14px;
+  color: white;
+}
+code.shell::before
+{
+  color: #a6e22e;
+  content: '> ';
+  font-size: 20px;
+}
+.page-header{
+  color:white;
+  background:linear-gradient( rgb(31, 39, 53) 80% , rgb(13, 17, 23));
+  width:100%;
+  height:80px;
+  margin-bottom: 0px;
+}
+p
+{
+  line-height: 25px;
+    font-size: 13px;
+}
+
+#started-vid
+{
+  width:100%;
+}
+.scrollable
+{
+  height:140px;
+  overflow-y: scroll;
+}
+#started-logo
+{
+  float: right;
+  height: 75px;
+  margin-top: 8px;
+  margin-right: -10px;
+}
+.some-phrase
+{
+  font-size: 1.2em;
+  font-weight: 700;
+}

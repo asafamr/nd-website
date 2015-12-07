@@ -482,26 +482,24 @@ background-color: white;
   position: absolute;
   top: 53px;
   right: 10px;
-  font-size: 40px;
-
+  font-size: 30px;
 }
 .git-link a{
-
   color: white;
 }
 .git-link a:hover{
   color: #8E9BB1;
 }
 .waffle-link{
-    z-index: 30;
+  z-index: 30;
   position: absolute;
   top: 58px;
   right: 45px;
-  font-size: 40px;
+  font-size: 30px;
 }
 .waffle-link a{
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
   display: block;
   background-size: contain;
   background-image: url(../img/waffle.png);
@@ -529,4 +527,35 @@ background-color: white;
 p
 {
   font-size: 14px;
+}
+
+
+.facebook-link{
+  z-index: 30;
+  position: absolute;
+  top: 53px;
+  right: 140px;
+  font-size: 30px;
+
+}
+.facebook-link a{
+  color: white;
+}
+.facebook-link a:hover{
+  color: #8E9BB1;
+}
+
+.twitter-link{
+  z-index: 30;
+  position: absolute;
+  top: 53px;
+  right: 90px;
+  font-size: 30px;
+
+}
+.twitter-link a{
+  color: white;
+}
+.twitter-link a:hover{
+  color: #8E9BB1;
 }

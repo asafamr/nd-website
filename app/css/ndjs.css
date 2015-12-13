@@ -69,9 +69,10 @@ header .intro-text .name {
 }
 
 header .intro-text .moto {
-    font-size: 1.45em;
-    font-weight: 500;
-    margin-top: -20px;
+    font-size: 1.15em;
+    font-weight: 100;
+    margin-top: 15px;
+    font-style: italic;
     display: block;
 }
 
@@ -390,10 +391,10 @@ footer .footer-below {
 
 #ndjs-logo
 {
-  width:250px;
-  height: 250px;
-  margin-bottom:-30px;
-  margin-top:-40px;
+  width:200px;
+  height: 200px;
+  margin-bottom:-10px;
+  margin-top:-20px;
 }
 
 .navbar {
@@ -438,10 +439,7 @@ span.why-quote {
 #what-btn:hover {
     background-color:#5B7AB1;
 }
-section#contact {
-    background-color: #1F2735;
-    color: white;
-}
+
 .why-btn-container{
   position: absolute; */
   bottom: 0px;

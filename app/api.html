@@ -12,25 +12,20 @@
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha256-7s5uDGW3AHqw6xtJmNNtr+OBRJUlgkNJEo78P4b0yRw= sha512-nNo+yCHEyn0smMxSswnf/OnX6/KwJuZTlNZBjauKhTK0c+zT+q5JOCx0UFhXQ6rJR9jg6Es8gPuD2uZcYDLqSw==" crossorigin="anonymous">
   <link href='https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+  <link href="css/prism.css" rel="stylesheet" type='text/css'>
   <link href="css/api.css" rel="stylesheet" type='text/css'>
-
 
 
 </head>
 
 <body id="page-top" class="index">
   <div class="container">
-
-
-
-
-
-
     <div class="col-xs-3 left-side">
       <a href="/"><div class="duck-icon"></div></a>
       <div class="header-title">NDJS API</div>
       <div class="header-spacer"></div>
-
+      <a href="#ndfile"><div class="dox-menu-component">ndfile.js</div></a>
+      <a href="#changelog"><div class="dox-menu-component">Change log</div></a>
       <!--start-menu-->
 
 <!-- rendered automatically -->
@@ -58,8 +53,18 @@
         <a href="ndPager"><div class="dox-menu-service-name">ndPager</div></a>
         <div class="dox-menu-methods">
           <div class="dox-menu-method">
+            <a href="#ndPager-gotoPageName"><div class="dox-menu-method-name">
+              gotoPageName
+            </div></a>
+          </div>
+          <div class="dox-menu-method">
             <a href="#ndPager-gotoPageNumber"><div class="dox-menu-method-name">
               gotoPageNumber
+            </div></a>
+          </div>
+          <div class="dox-menu-method">
+            <a href="#ndPager-registerBeforeLeaveCallback"><div class="dox-menu-method-name">
+              registerBeforeLeaveCallback
             </div></a>
           </div>
           <div class="dox-menu-method">
@@ -98,7 +103,7 @@
         <a href="ndActions"><div class="dox-menu-service-name">ndActions</div></a>
       </div>
       <div class="dox-menu-service">
-        <a href="ndEvents"><div class="dox-menu-service-name">ndEvents</div></a>
+        <a href="ndNotifications"><div class="dox-menu-service-name">ndNotifications</div></a>
       </div>
       <div class="dox-menu-service">
         <a href="ndWindow"><div class="dox-menu-service-name">ndWindow</div></a>
@@ -190,18 +195,18 @@
             </div></a>
           </div>
           <div class="dox-menu-method">
-            <a href="#job-retryJob"><div class="dox-menu-method-name">
-              retryJob
+            <a href="#job-startJob"><div class="dox-menu-method-name">
+              startJob
             </div></a>
           </div>
           <div class="dox-menu-method">
-            <a href="#job-ignoreRetryJob"><div class="dox-menu-method-name">
-              ignoreRetryJob
+            <a href="#job-cancelNamedJob"><div class="dox-menu-method-name">
+              cancelNamedJob
             </div></a>
           </div>
           <div class="dox-menu-method">
-            <a href="#job-abortRetryJob"><div class="dox-menu-method-name">
-              abortRetryJob
+            <a href="#job-releasePendingJob"><div class="dox-menu-method-name">
+              releasePendingJob
             </div></a>
           </div>
           <div class="dox-menu-method">
@@ -214,10 +219,13 @@
         <h4>Core jobs</h4>
         <div class="dox-menu-jobs">
           <div class="dox-menu-job">
-            <div class="dox-menu-job-name">extract</div>
+              <a href="#job-copy"><div class="dox-menu-job-name">copy</div></a>
           </div>
           <div class="dox-menu-job">
-            <div class="dox-menu-job-name">multi</div>
+              <a href="#job-multi"><div class="dox-menu-job-name">multi</div></a>
+          </div>
+          <div class="dox-menu-job">
+              <a href="#job-sfx"><div class="dox-menu-job-name">sfx</div></a>
           </div>
         </div>
       </div>
@@ -233,6 +241,11 @@
           <div class="dox-menu-method">
             <a href="#notifications-pushNotification"><div class="dox-menu-method-name">
               pushNotification
+            </div></a>
+          </div>
+          <div class="dox-menu-method">
+            <a href="#notifications-listenToNotifications"><div class="dox-menu-method-name">
+              listenToNotifications
             </div></a>
           </div>
         </div>
@@ -300,7 +313,7 @@
 <!--end-menu-->
     </div>
     <div  class="col-xs-9 right-side">
-      <div class=" api-packages">
+      <div class="api-packages">
         <h3>NDJS components:</h3>
         <ul>
           <li><div class="package-name">nd-node<span class="language">JavaScript - npm</span> <a class="gitlink" href="https://github.com/asafamr/nd-node"><i class="fa fa-github"></i></a></div>
@@ -310,9 +323,12 @@
               <div class="package-desc">Angular frontend - pages rendering, UI serivces and directives</div></li>
 
               <li><div class="package-name">nd-grunt<span class="language">JavaScript - npm</span> <a class="gitlink" href="https://github.com/asafamr/nd-grunt"><i class="fa fa-github"></i></a></div>
-                <div class="package-desc">Tasks for compiling and debugging installers - calls nd-pack for compilation</div></li>
+                <div class="package-desc">Tasks for compiling and debugging installers : <br> <b>nd_debug</b> task allows easiser developing in a browser based environment
+                  <br><b>nd_compile</b> creates an executable using nd-pack</div></li>
 
-                <li><div class="package-name">nd-pack<span class="language">C++</span> <a class="gitlink" href="https://github.com/asafamr/nd-pack"><i class="fa fa-github"></i></a></div>
+                  <li><div class="package-name">nd-pack<span class="language">C++</span>
+                    <a class="gitlink" href="https://github.com/asafamr/nd-pack"><i class="fa fa-github"></i></a>
+                  </div>
                   <div class="package-desc">Compiles nd-extract, nwjs, frontend, backend and compressed files to one executable</div></li>
 
                   <li><div class="package-name">nd-extract<span class="language">C++</span> <a class="gitlink" href="https://github.com/asafamr/nd-pack"><i class="fa fa-github"></i></a></div>
@@ -321,11 +337,114 @@
                     <li><div class="package-name">peml<span class="language">C++</span> <a class="gitlink" href="https://github.com/asafamr/peml"><i class="fa fa-github"></i></a></div>
                       <div class="package-desc">Windows PE metadata editing lib used by nd-pack</div></li>
 
-                    </ul>
-                  </div>
-                  <div class="row">
-                    <h2>JavaScript components API</h2>
-                    <!--start-main-->
+                      <li><div class="package-name">nd-website<span class="language">JavaScript, HTML</span> <a class="gitlink" href="https://github.com/asafamr/nd-website"><i class="fa fa-github"></i></a></div>
+                        <div class="package-desc">This website (including this page. Sooo meta...)</div></li>
+
+                        <li><div class="package-name">nd-proj<span class="language">JavaScript, HTML</span> <a class="gitlink" href="https://github.com/asafamr/nd-proj"><i class="fa fa-github"></i></a></div>
+                          <div class="package-desc">NDJS starter project</div></li>
+
+                          </ul>
+                        </div>
+                        <div class="ndfile">
+                          <a name="ndfile"></a>
+                          <h3>ndfile.js format</h3>
+                          <p>ndfile.js is the installer configuration file.
+                            It defines pages (UI HTML views) and
+                            jobs(time consuming Node operations such as extraction or download).</p>
+                            <p>Pages and jobs are mapped to install stages.
+                              <br>An example : <br>installer with 'install' stage that have an End user license page,
+                              an extraction progress page and an extraction job.
+                              <br>'uninstall' stage with deletion progress page and delete job.
+                            </p>
+                            An example ndfile.js:
+<pre><code class="language-javascript">
+  module.exports = function (ndjs) {
+  'use strict';
+      ndjs.initConfig(
+  {
+    'options':
+    {
+      /*UI views directory*/
+      'frontend':'front',
+
+      /*custom NDJS modules directory*/
+      'backend':'back',
+
+      ,/*directory of file to be compressed and distibuted with installer*/
+      'outgoing':'outgoing'
+
+      /*directory of other assets - icon for example*/
+      'etc':'etc',
+
+      /*will be included in nwjs setting file:
+      https://github.com/nwjs/nw.js/wiki/manifest-format#window-subfields */
+      'window':
+      {
+        'frame':false,
+        'toolbar': true,
+        'width': 720,
+        'height': 440,
+  	    'icon': 'images/duck.png'
+      },
+      /* meta fields of exe*/
+      'description':'my first NDJS installer',
+      'productname':'my NDJS installer',
+      'company':'ACME',
+      'version':'1.0.0.0',
+      'icon':'duck.ico'
+    },
+    /*install stage*/
+  	'install':
+  	{
+  		'pages':  /*install stage pages*/
+  		[
+        'welcome','eula','config','extract','conclusion','abort'
+  		],
+  		'jobs':/*install stage jobs*/
+  		{
+        'main':
+  			{'type':'multi','settings':{'subJobs':[
+  				{'type':'sfx','settings':{'files':[
+            {'from':'tomcat','to':'<%=user.config.installDir%>','size':14},
+            {'from':'jre','to':'<%=user.config.installDir%>/jre','size':94},
+            {'from':'webapp','to':'<%=user.config.installDir%>/webapps/ROOT','size':0}]}},
+          {'type':'myConfig'}
+  			]}}
+  		}
+  	},
+    /*uninstall stage*/
+  	'uninstall':
+  	{
+  		'pages':/*uninstall stage pages*/
+      [
+        'confirm','uninstallprogress','bye'
+  		],
+  		'jobs':{/*uninstall stage jobs*/
+      'remove':
+        {'type':'delete','settings':{}}
+  	}}
+  });
+  };
+
+</code></pre>
+                        </div>
+                        <div class="changelog">
+                          <a name="changelog"></a>
+                          <h3>Change log</h3>
+                          <ul>
+                            <li><h4>Version 0.2.0</h4>
+                              nd-node: Jobs module redesigned to allow jobs to enter pending status and wait for user decisions.
+                              extract job renamed to sfx.
+                              copy job created.
+                              all builtin UI actions renamed to module_action.
+                              <br>nd-angular: job pending support. ui events renamed to ui notifications. added page leave callback to ndPager.
+                              <br>nd-proj: added modal service job pending support
+                            </li>
+                          </ul>
+                        </div>
+                        <div class="row">
+                          <h2>JavaScript components API</h2>
+                          <!--start-main-->
 <!-- rendered automatically-->
 
 
@@ -344,7 +463,7 @@ note:the module waits for NDJS backend to be ready and then bootstraps angular a
       <div class="dox-methods">
         <div class="dox-method" >
           <a name="ndJobManager-startJob"></a>
-          <div class="dox-method-sign">ndJobManager.startJob(jobName,force)</div>
+          <div class="dox-method-sign">ndJobManager.startJob(jobName,force,pendingCallback)</div>
           <div class="dox-service-description">Description: start a job by name</div>
           Parameters:
           <ul class="dox-method-params">
@@ -357,6 +476,11 @@ note:the module waits for NDJS backend to be ready and then bootstraps angular a
               <div class="dox-param-name">force</div>
               <div class="dox-param-type">Boolean</div>
               <div class="dox-param-description">start even it has already started before</div>
+            </li>
+            <li>
+              <div class="dox-param-name">pendingCallback</div>
+              <div class="dox-param-type">Function</div>
+              <div class="dox-param-description">called when job is waiting for user decision on error - pendingCallback(err,details,options,answerCallback) example in https://github.com/asafamr/nd-proj/blob/master/front/views/extract/extract.controller.js</div>
             </li>
           </ul>
         </div>
@@ -382,9 +506,23 @@ note:the module waits for NDJS backend to be ready and then bootstraps angular a
       <div class="dox-service-description">manages ndjs pages changes</div>
       <div class="dox-methods">
         <div class="dox-method" >
+          <a name="ndPager-gotoPageName"></a>
+          <div class="dox-method-sign">ndPager.gotoPageName(pageName)</div>
+          <div class="dox-service-description">Description: goto to page named {pageName}.</div>
+          Parameters:
+          <ul class="dox-method-params">
+            <li>
+              <div class="dox-param-name">pageName</div>
+              <div class="dox-param-type">String</div>
+              <div class="dox-param-description">target page name</div>
+            </li>
+          </ul>
+          <div class="dox-service-example">Example: gotoPageName(&#x27;abort&#x27;)</div>
+        </div>
+        <div class="dox-method" >
           <a name="ndPager-gotoPageNumber"></a>
           <div class="dox-method-sign">ndPager.gotoPageNumber(pageNum)</div>
-          <div class="dox-service-description">Description: goto to page number</div>
+          <div class="dox-service-description">Description: goto to page number {pageNum}. out of boundries index generate error - does not enforce next enabled,disabled etc...</div>
           Parameters:
           <ul class="dox-method-params">
             <li>
@@ -394,6 +532,20 @@ note:the module waits for NDJS backend to be ready and then bootstraps angular a
             </li>
           </ul>
           <div class="dox-service-example">Example: gotoPageNumber(5)</div>
+        </div>
+        <div class="dox-method" >
+          <a name="ndPager-registerBeforeLeaveCallback"></a>
+          <div class="dox-method-sign">ndPager.registerBeforeLeaveCallback(function)</div>
+          <div class="dox-service-description">Description: register a function to be called before leaving current page. The function will get as param the next page number. Promises are resolved and then if the callback function return a falsy value, the page leave is aborted</div>
+          Parameters:
+          <ul class="dox-method-params">
+            <li>
+              <div class="dox-param-name">function</div>
+              <div class="dox-param-type">callback</div>
+              <div class="dox-param-description">to call when page leave is required</div>
+            </li>
+          </ul>
+          <div class="dox-service-example">Example: registerBeforeLeaveCallback(myFunc) with function myFunc(nextPageNumber)</div>
         </div>
         <div class="dox-method" >
           <a name="ndPager-backEnabled"></a>
@@ -433,12 +585,12 @@ note:the module waits for NDJS backend to be ready and then bootstraps angular a
         <div class="dox-method" >
           <a name="ndPager-goBackPage"></a>
           <div class="dox-method-sign">ndPager.goBackPage()</div>
-          <div class="dox-service-description">Description: go back to the last page</div>
+          <div class="dox-service-description">Description: go back to the previous page</div>
         </div>
         <div class="dox-method" >
           <a name="ndPager-getPageNumber"></a>
           <div class="dox-method-sign">ndPager.getPageNumber()</div>
-          <div class="dox-service-description">Description: get page number</div>
+          <div class="dox-service-description">Description: get current page index</div>
           <div class="dox-service-return">Returns: {Number} page number</div>
         </div>
         <div class="dox-method" >
@@ -454,10 +606,10 @@ note:the module waits for NDJS backend to be ready and then bootstraps angular a
       <div class="dox-service-description">interface for ui actions registered from the NDJS backend. Actions are injected to this service as native functions that return a promise</div>
     </div>
     <div class="dox-service" >
-      <a name="ndEvents"></a>
-      <div class="dox-service-name">ndEvents</div>
+      <a name="ndNotifications"></a>
+      <div class="dox-service-name">ndNotifications</div>
       <div class="dox-service-description">Handles notification pushed from the backend to the UI.
-Uses angular broadcast to send events. check the job manager for events handling</div>
+Uses angular broadcast to send notifications. check the job manager for notifications handling</div>
     </div>
     <div class="dox-service" >
       <a name="ndWindow"></a>
@@ -601,6 +753,7 @@ Uses angular broadcast to send events. check the job manager for events handling
         <div class="dox-method" >
           <a name="fs-getWorkingDir"></a>
           <div class="dox-method-sign">fs.getWorkingDir()</div>
+          <div class="dox-module-description">Description: registered as uiAction fs_getWorkingDir</div>
           <div class="dox-module-return">Returns: current working dir</div>
         </div>
       </div>
@@ -635,40 +788,67 @@ Uses angular broadcast to send events. check the job manager for events handling
           <div class="dox-module-example">Example: getConfig(&#x27;pages[2]&#x27;) will return the 3rd page in the current install stage</div>
         </div>
         <div class="dox-method" >
-          <a name="job-retryJob"></a>
-          <div class="dox-method-sign">job.retryJob(idx)</div>
-          <div class="dox-module-description">Description: registered UI action - retry a job marked as error</div>
+          <a name="job-startJob"></a>
+          <div class="dox-method-sign">job.startJob(jobType,settings,callbackProgress,callbackCancelCalled,callbackPend)</div>
           Parameters:
           <ul class="dox-method-params">
             <li>
-              <div class="dox-param-name">idx</div>
-              <div class="dox-param-description">{Number} index of retry job in retry queue</div>
+              <div class="dox-param-name">jobType</div>
+              <div class="dox-param-description">{String} type of job to strart</div>
+            </li>
+            <li>
+              <div class="dox-param-name">settings</div>
+              <div class="dox-param-description">{Object} settings of job instance</div>
+            </li>
+            <li>
+              <div class="dox-param-name">callbackProgress</div>
+              <div class="dox-param-description">{Function} callback to report progress - should pass a number between 0(no progress) and 1 (job done)</div>
+            </li>
+            <li>
+              <div class="dox-param-name">callbackCancelCalled</div>
+              <div class="dox-param-description">{Function} callback to be called for checking if job cancel was asked - should return true if should cancel</div>
+            </li>
+            <li>
+              <div class="dox-param-name">callbackPend</div>
+              <div class="dox-param-description">{Function} callback to be called when job is waiting for user decisions. check copy core job for refernce</div>
             </li>
           </ul>
+          <div class="dox-module-return">Returns: promise of the new job or throws error</div>
+          <div class="dox-module-example">Example: startJob(&#x27;extract&#x27;,{&#x27;files&#x27;:[{&#x27;from&#x27;:&#x27;a&#x27;,&#x27;to&#x27;:&#x27;b&#x27;,&#x27;size&#x27;:109}]}) will start extracting from a to b</div>
         </div>
         <div class="dox-method" >
-          <a name="job-ignoreRetryJob"></a>
-          <div class="dox-method-sign">job.ignoreRetryJob(idx)</div>
-          <div class="dox-module-description">Description: registered UI action - ignore a job marked as error</div>
+          <a name="job-cancelNamedJob"></a>
+          <div class="dox-method-sign">job.cancelNamedJob(name)</div>
+          <div class="dox-module-description">Description: registered UI action - signal to cancel a job - does not force anything</div>
           Parameters:
           <ul class="dox-method-params">
             <li>
-              <div class="dox-param-name">idx</div>
-              <div class="dox-param-description">{Number} index of retry job in retry queue</div>
+              <div class="dox-param-name">name</div>
+              <div class="dox-param-description">{String} job name</div>
             </li>
           </ul>
+          <div class="dox-module-example">Example: cancelNamedJob(&#x27;main&#x27;);</div>
         </div>
         <div class="dox-method" >
-          <a name="job-abortRetryJob"></a>
-          <div class="dox-method-sign">job.abortRetryJob(idx)</div>
-          <div class="dox-module-description">Description: registered UI action - abort a job marked as error</div>
+          <a name="job-releasePendingJob"></a>
+          <div class="dox-method-sign">job.releasePendingJob(id,answer,options)</div>
+          <div class="dox-module-description">Description: registered UI action - release a job pending for user decisions</div>
           Parameters:
           <ul class="dox-method-params">
             <li>
-              <div class="dox-param-name">idx</div>
-              <div class="dox-param-description">{Number} index of retry job in retry queue</div>
+              <div class="dox-param-name">id</div>
+              <div class="dox-param-description">{Number} id got from job_pending notification</div>
+            </li>
+            <li>
+              <div class="dox-param-name">answer</div>
+              <div class="dox-param-description">{String} action to take - also in job_pending notification</div>
+            </li>
+            <li>
+              <div class="dox-param-name">options</div>
+              <div class="dox-param-description">{Object} additional argument to send</div>
             </li>
           </ul>
+          <div class="dox-module-example">Example: releasePendingJob(2,&#x27;ignore&#x27;,{});</div>
         </div>
         <div class="dox-method" >
           <a name="job-startNamedJob"></a>
@@ -691,13 +871,46 @@ Uses angular broadcast to send events. check the job manager for events handling
       </div>
       <div class="dox-jobs">
         <h4>Core job types:</h4>
+        <a name="job-copy"></a>
         <div class="dox-job">
-          <div class="dox-job-name">extract</div>
-          <div class="dox-job-description">extract files compressed into the installer file (mocks by copy during debug) thorw retry error when insufficient premmissions</div>
+          <div class="dox-job-name">copy</div>
+          <div class="dox-job-description">copy files/directories job</div>
+          Parameters:
+          <ul class="dox-method-params">
+            <li>
+              <div class="dox-param-name">subjobs</div>
+              <div class="dox-param-description">{Array}</div>
+            </li>
+          </ul>
+          <div class="dox-job-example">{&#x27;type&#x27;:&#x27;copy&#x27;,&#x27;settings&#x27;:{&#x27;files&#x27;:[ {&#x27;from&#x27;:&#x27;&lt;%&#x3D;user.config.installDir%&gt;/tomcat&#x27;,&#x27;to&#x27;:&#x27;&lt;%&#x3D;user.config.installDir%&gt;/tomcat2&#x27;,&#x27;size&#x27;:109}]}}</div>
         </div>
+        <a name="job-multi"></a>
         <div class="dox-job">
           <div class="dox-job-name">multi</div>
           <div class="dox-job-description">run sub jobs one after the other</div>
+          Parameters:
+          <ul class="dox-method-params">
+            <li>
+              <div class="dox-param-name">subjobs</div>
+              <div class="dox-param-description">{Array}</div>
+            </li>
+          </ul>
+          <div class="dox-job-example">{type:&quot;multi&quot;,settings:{subJobs:[{another-job1},{another-job2}]}</div>
+        </div>
+        <a name="job-sfx"></a>
+        <div class="dox-job">
+          <div class="dox-job-name">sfx</div>
+          <div class="dox-job-description">extract files compressed into the installer file (mocks by copy during debug) thorw retry error when insufficient premmissions</div>
+          Parameters:
+          <ul class="dox-method-params">
+            <li>
+              <div class="dox-param-name">files</div>
+              <div class="dox-param-description">{Array} array of objects with properties: from (source of extract), to (destenation) and optionally size:MB to extract for progress estimation</div>
+            </li>
+          </ul>
+          <div class="dox-job-example">settings example 	{&#x27;type&#x27;:&#x27;extract&#x27;,&#x27;settings&#x27;:{&#x27;files&#x27;:[ {&#x27;from&#x27;:&#x27;tomcat&#x27;,&#x27;to&#x27;:&#x27;&lt;%&#x3D;user.config.installDir%&gt;&#x27;,&#x27;size&#x27;:109},
+{&#x27;from&#x27;:&#x27;jre&#x27;,&#x27;to&#x27;:&#x27;&lt;%&#x3D;user.config.installDir%&gt;/jre&#x27;,&#x27;size&#x27;:93},
+{&#x27;from&#x27;:&#x27;webapp&#x27;,&#x27;to&#x27;:&#x27;&lt;%&#x3D;user.config.installDir%&gt;/webapps/ROOT&#x27;,&#x27;size&#x27;:0}]}}</div>
         </div>
       </div>
     </div>
@@ -722,7 +935,7 @@ Uses angular broadcast to send events. check the job manager for events handling
         <div class="dox-method" >
           <a name="notifications-pushNotification"></a>
           <div class="dox-method-sign">notifications.pushNotification(name,value)</div>
-          <div class="dox-module-description">Description: push notfications to UI</div>
+          <div class="dox-module-description">Description: push notfications to UI and custom listeners</div>
           Parameters:
           <ul class="dox-method-params">
             <li>
@@ -735,6 +948,19 @@ Uses angular broadcast to send events. check the job manager for events handling
             </li>
           </ul>
           <div class="dox-module-example">Example: pushNotification(&#x27;downloadComplete&#x27;,{package:abc.zip})</div>
+        </div>
+        <div class="dox-method" >
+          <a name="notifications-listenToNotifications"></a>
+          <div class="dox-method-sign">notifications.listenToNotifications(listener)</div>
+          <div class="dox-module-description">Description: push notfications to a custom listener for easier server side global notifications</div>
+          Parameters:
+          <ul class="dox-method-params">
+            <li>
+              <div class="dox-param-name">listener</div>
+              <div class="dox-param-description">{Function} will be called with notification full data {name,value,time}</div>
+            </li>
+          </ul>
+          <div class="dox-module-example">Example: listenToNotifications(myCallback)</div>
         </div>
       </div>
     </div>
@@ -831,7 +1057,7 @@ Uses angular broadcast to send events. check the job manager for events handling
               <div class="dox-param-description">{Function} callback of action( could be syncronous or retrun a pormise)</div>
             </li>
           </ul>
-          <div class="dox-module-example">Example: rregisterAction(&#x27;getNotificationsFromIdx&#x27;,[&#x27;idx&#x27;],getNotificationsFromIdx)</div>
+          <div class="dox-module-example">Example: rregisterAction(&#x27;notifications_getNotificationsFromIdx&#x27;,[&#x27;idx&#x27;],getNotificationsFromIdx)</div>
         </div>
         <div class="dox-method" >
           <a name="state-pushNotification"></a>
@@ -869,21 +1095,21 @@ Uses angular broadcast to send events. check the job manager for events handling
 <!-- end rendered automatically-->
 
 <!--end-main-->
-    </div>
-  </div>
-</div>
+                            </div>
+                          </div>
+                        </div>
 
+                        <script src="js/prism.js"></script>
+                        <script>
+                        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-<script>
-(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+                        ga('create', 'UA-70857627-1', 'auto');
+                        ga('send', 'pageview');
 
-ga('create', 'UA-70857627-1', 'auto');
-ga('send', 'pageview');
+                        </script>
+                      </body>
 
-</script>
-</body>
-
-</html>
+                      </html>

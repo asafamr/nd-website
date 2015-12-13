@@ -179,3 +179,8 @@ span.language {
     font-style: italic;
     color: #6A6A6B;
 }
+pre
+{
+  overflow: scroll;
+width: 550px;
+}

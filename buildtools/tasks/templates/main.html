@@ -92,9 +92,12 @@ Parameters:
       <div class="dox-jobs">
         <h4>Core job types:</h4>
         {{#each this.jobs}}
+        <a name="job-{{this.name}}"></a>
         <div class="dox-job">
           <div class="dox-job-name">{{this.name}}</div>
           <div class="dox-job-description">{{this.description}}</div>
+          {{> params}}
+          <div class="dox-job-example">{{this.example}}</div>
         </div>
         {{/each}}
       </div>
